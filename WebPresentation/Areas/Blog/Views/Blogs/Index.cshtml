@@ -1,0 +1,123 @@
+﻿
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<div id="app">
+
+    {{message}}
+
+    <div>
+        <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="text" v-model="Title" class="form-control" value="" />
+        </div>
+        <div class="form-group">
+            <label for="Title">Description</label>
+            <input type="text" v-model="Description" class="form-control" value="" />
+        </div>
+        @*<div class="form-group">
+                <label for="Title">Picture</label>
+                <input type="file" name="Picture" v-model="Picture" value="" />
+            </div>*@
+        <button class="btn btn-primary" v-on:click="addBlogs"> Add New Blog</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Desciption</th>
+                <th>Picture</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(blog,index) in blogs">
+                <td>0</td>
+                <td>{{blog.Title}}</td>
+                <td>{{blog.Description}}</td>
+                <td>{{blog.Picture}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+@section Scripts{
+
+
+    <script src="~/lib/vue/dist/vue.min.js"></script>
+    <script>
+
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "Blogs",
+                blogs: [{ Title: "mm", Description: "ddd" }, { Title: "cc", Description: "ccc" }],
+                Title: "",
+                Description: "",
+                // Picture:"",
+            },
+            created: function () {
+                this.getBlogs();
+
+
+            },
+            methods: {
+                addBlogs: function () {
+                    var vm = this;
+                    var newblog = {
+                        Title: vm.Title,
+                        Description: vm.Description,
+                        //Picture: this.Picture,
+                    }
+                    debugger;
+                    var ddd = JSON.stringify(newblog);
+                    fetch('/blog2', {
+                        method: "POST",
+                        headers: { 'contentType': 'application/json' },
+                        body: ddd
+                    }
+                    ).then(res => res.json())
+                        .then(data => {
+                            alert("ok");
+                        })
+                    //$.ajax({ url: "/blog2",body:ddd , method: "POST", headers: { 'contentType': 'application/json'} })
+                    //    .done(function (data) {
+                    //        vm.blogs.splice(0, 0, newblog);
+                    //        toastr.success("Success");
+                    //    })
+                    //    .fail(function () {
+                    //        toastr.error("Failed");
+                    //    })
+                    //    .always(function () {
+                    //        vm.Title = "";
+                    //        vm.Description = "";
+                    //    })
+
+
+
+
+                },
+                getBlogs: function () {
+                    var vm = this;
+                    /**/
+                    $.ajax({
+                        url: "/blog/GetBlogs", method: "Post", body:  { 'id': '5' }, data: {'id':'5'} , headers: {
+                            //'Accept': 'application/json; charset=utf-8',
+                            'Content-Type': 'application/json;charset=UTF-8'} })
+            /**/
+            .done(function (data) {
+                //vm.blogs = data;
+                vm.blogs = [{ Title: "mm", Description: "ddd" }, { Title: "cc", Description: "ccc" }];
+                toastr.success("Success");
+            })
+            .fail(function () {
+                toastr.error("Failed");
+            })
+    }
+}
+
+});
+    </script>
+}

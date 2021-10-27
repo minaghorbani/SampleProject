@@ -1,0 +1,104 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+header nav li a {
+font-size:15px;
+}
+header nav li {
+    padding:0px 10px;
+}
+.allRecipes {
+padding:8px 15px;
+
+}
+.mainMenu {
+    background-color: #1e1d26;
+    margin-bottom: 0px !important;
+    border-bottom-color: #1e1d26 !important;
+}
+.footerCategoryLinks {
+text-align:right;
+}
+    .footerCategoryLinks a {
+        color: #242424;
+        font-size:14px;
+    }
+    footer .container {
+        padding: 100px 10px;
+        background-color: #f7f7f7;
+    }
+
+footer{
+    
+    background-color: #f7f7f7;
+}
+ul.social a {
+    padding: 10px;
+    font-size: 20px;
+    color: #242424;
+}
+.footerCopyRight .social a {
+font-size:15px;
+}
+
+
+.row {
+margin:0px;
+}
+#whatToCook {
+text-align:right;
+direction:rtl;
+margin:10px;
+}
+    #whatToCook .btn {
+    margin-top:15px;
+    }
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1360px;
+    }
+}
+
+@media (min-width: 1500px) {
+    .container {
+        max-width: 1460px;
+    }
+}

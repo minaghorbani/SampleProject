@@ -1,0 +1,176 @@
+﻿
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<div id="app">
+
+    {{message}}
+
+    <button class="btn btn-primary" v-on:click="showAddCategoryModal">Add new Category</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>title</th>
+                <th>Desciption</th>
+                <th>picture</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(Category,index) in Categorys">
+                <td>0</td>
+                <td>{{Category.title}}<input type="hidden" name="id" v-model="Category.id"  value="{{Category.id}}" /></td>
+                <td>{{Category.description}}</td>
+                <td> <img v-bind:src="'/Picture/Category/'+Category.picture" style="width:30px; height:30px;" /></td>
+                <td>
+                    <button class="btn btn-danger" v-on:click="removeCategory(Category, index)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <div class="modal" tabindex="-1" id="AddNewCategoryModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="form-group">
+                            <label for="title">title</label>
+                            <input type="text" v-model="title" class="form-control" value="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="title">description</label>
+                            <input type="text" v-model="description" class="form-control" value="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="title">picture</label>
+                            <input type="file" ref="file" v-on:change="handleFileUpload" name="picture" id="pic" v-model="picture" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" v-on:click="addCategorys">Add New Category</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+  
+    <script>
+
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "Categorys",
+                Categorys: [],
+                id: "",
+                title: "",
+                description: "",
+                picture: '',
+                selectedFiles: undefined,
+            },
+            created: function () {
+                this.getCategorys();
+
+
+            },
+            methods: {
+                showAddCategoryModal: function () {
+                    $("#AddNewCategoryModal").modal("show");
+                },
+                removeCategory: function (Category, index) {
+                    var vm = this;
+
+                    $.ajax({
+                        url: "/Category", data: Category, method: "DELETE"
+                    })
+                        .done(function (data) {
+                            vm.Categorys.splice(index, 1);
+                            toastr.success("Success");
+                        })
+                        .fail(function () {
+                            toastr.error("Failed");
+                        })
+
+                    
+                },
+                handleFileUpload() {
+                    debugger;
+                    this.selectedFiles = this.$refs.file.files;
+                },
+                addCategorys: function () {
+                    var vm = this;
+                    var newCategory = {
+                        title: vm.title,
+                        description: vm.description,
+                    }
+                    debugger;
+                    var ddd = JSON.stringify(newCategory);
+
+                    var input = document.getElementById('pic');
+                    var files = input.files;
+
+                    var formData = new FormData();
+                    formData.append("title", vm.title)
+                    formData.append("description", vm.description)
+                    for (var i = 0; i != files.length; i++) {
+                        formData.append("files", files[i]);
+                    }
+
+                    $.ajax({
+                        url: "/Category", data: formData, method: "POST", processData: false, contentType: false,
+                    })
+                        .done(function (data) {
+                            vm.Categorys.splice(0, 0, newCategory);
+                            toastr.success("Success");
+                            $("#AddNewCategoryModal").modal("hide");
+                        })
+                        .fail(function () {
+                            toastr.error("Failed");
+                        })
+                        .always(function () {
+                            vm.title = "";
+                            vm.description = "";
+                        })
+
+
+
+
+                },
+                getCategorys: function () {
+                    var vm = this;
+                    /**/
+                    $.ajax({
+                        url: "/Category", method: "Get"
+                    })
+                        /**/
+                        .done(function (data) {
+                            debugger
+                            vm.Categorys = data;
+                            //vm.Categorys = [{ title: "mm", description: "ddd" }, { title: "cc", description: "ccc" }];
+                            toastr.success("Success");
+                        })
+                        .fail(function () {
+                            toastr.error("Failed");
+                        })
+                }
+            }
+
+        });
+    </script>
+}

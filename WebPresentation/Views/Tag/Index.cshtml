@@ -1,0 +1,163 @@
+﻿
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<div id="app">
+
+    {{message}}
+
+    <button class="btn btn-primary" v-on:click="showAddTagModal">Add new Tag</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>title</th>
+                <th>Desciption</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(Tag,index) in Tags">
+                <td>0</td>
+                <td>{{Tag.title}}<input type="hidden" name="id" v-model="Tag.id"  value="{{Tag.id}}" /></td>
+                <td>{{Tag.description}}</td>
+                <td>
+                    <button class="btn btn-danger" v-on:click="removeTag(Tag, index)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <div class="modal" tabindex="-1" id="AddNewTagModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Tag</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="form-group">
+                            <label for="title">title</label>
+                            <input type="text" v-model="title" class="form-control" value="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="title">description</label>
+                            <input type="text" v-model="description" class="form-control" value="" />
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" v-on:click="addTags">Add New Tag</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "Tags",
+                Tags: [],
+                id: "",
+                title: "",
+                description: "",
+                picture: '',
+                
+            },
+            created: function () {
+                this.getTags();
+
+
+            },
+            methods: {
+                showAddTagModal: function () {
+                    $("#AddNewTagModal").modal("show");
+                },
+                removeTag: function (Tag, index) {
+                    var vm = this;
+
+                    $.ajax({
+                        url: "/Tag", data: Tag, method: "DELETE"
+                    })
+                        .done(function (data) {
+                            vm.Tags.splice(index, 1);
+                            toastr.success("Success");
+                        })
+                        .fail(function () {
+                            toastr.error("Failed");
+                        })
+
+                    
+                },
+               
+                addTags: function () {
+                    var vm = this;
+                    var newTag = {
+                        title: vm.title,
+                        description: vm.description,
+                    }
+                    debugger;
+                    var ddd = JSON.stringify(newTag);
+
+                    var input = document.getElementById('pic');
+                   
+                    var formData = new FormData();
+                    formData.append("title", vm.title)
+                    formData.append("description", vm.description)
+                   
+                    $.ajax({
+                        url: "/Tag", data: formData, method: "POST", processData: false, contentType: false,
+                    })
+                        .done(function (data) {
+                            vm.Tags.splice(0, 0, newTag);
+                            toastr.success("Success");
+                            $("#AddNewTagModal").modal("hide");
+                        })
+                        .fail(function () {
+                            toastr.error("Failed");
+                        })
+                        .always(function () {
+                            vm.title = "";
+                            vm.description = "";
+                        })
+
+
+
+
+                },
+                getTags: function () {
+                    var vm = this;
+                    /**/
+                    $.ajax({
+                        url: "/Tag", method: "Get"
+                    })
+                        /**/
+                        .done(function (data) {
+                            debugger
+                            vm.Tags = data;
+                            //vm.Tags = [{ title: "mm", description: "ddd" }, { title: "cc", description: "ccc" }];
+                            toastr.success("Success");
+                        })
+                        .fail(function () {
+                            toastr.error("Failed");
+                        })
+                }
+            }
+
+        });
+    </script>
+}

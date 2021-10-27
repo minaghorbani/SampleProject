@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="description" content="@ViewData["Description"]">
+    <meta name="keywords" content="آموزش آشپزی -  فروشگاه آنلاین">
+    <link rel="alternate" hreflang="fa-IR" href="http://cooksteps.ir/">
+    <title>@ViewData["Title"]</title>
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1 " />
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:type" content="@ViewData["Type"]">
+    <meta property="og:title" content="@ViewData["Title"]">
+    <meta property="og:description" content="@ViewData["Description"]">
+    <meta property="og:url" content="http://cooksteps.ir/@ViewData["Url"]">
+    <meta property="article:publisher" content="https://www.facebook.com/cook.steps/">
+    <meta property="og:site_name" content="Cook Steps - کوک استپز - آشپزی گام به گام">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="@ViewData["Description"]">
+    <meta name="twitter:title" content="@ViewData["Title"]">
+    <meta name="referrer" content="always">
+    <meta name="msapplication-TileImage" content="/lib/pic/CookStepsLogo_New.jpg">
+
+    @await RenderSectionAsync("Tags", required: true)
+    @*
+        <meta property="article:tag" content="شیرینی">
+        <meta property="article:tag" content="شیرینی ساده">
+        <meta property="article:tag" content="طرز تهیه مافین">
+        <meta property="article:section" content="شیرینی ها">
+        <meta property="article:published_time" content="2021-02-01T16:45:38+00:00">
+        <meta property="article:modified_time" content="2021-02-01T16:45:41+00:00">
+        <meta property="og:updated_time" content="2021-02-01T16:45:41+00:00">
+        <meta property="og:image" content="http://cooksteps.ir/wp-content/uploads/2021/02/DSCN7386_11-768x1024.jpg">
+        <meta property="og:image:width" content="768">
+        <meta property="og:image:height" content="1024">
+        <meta name="twitter:image" content="http://cooksteps.ir/wp-content/uploads/2021/02/DSCN7386_11.jpg">
+    *@
+
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/fonts.css" rel="stylesheet" />
+    <link href="/lib/bootstrap/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/toastr.js/toastr.css" rel="stylesheet" />
+
+</head>
+<body dir="rtl" style="padding-top:0px; font-family:IRANSansWeb,Arial,Tahoma,sans-serif;">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 mainMenu">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img class="logo-main scale-with-grid lazyloaded" src="/lib/pic/logo_x1.png" data-retina="/lib/pic/logo_x2.png" data-height="50" alt="logo_x1" data-no-retina="" data-lazy-src="/lib/pic/logo_x1.png" data-was-processed="true">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">محصولات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">دستور پخت ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">سلامتی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">درباره ما</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">ارتباط با ما</a>
+                        </li>
+                    </ul>
+                    <div>
+                        <a id="header_cart" href="https://cooksteps.ir/cart/" class="text-success"><i class="bi bi-cart2"></i><span>0</span></a>
+                        <a href="https://cooksteps.ir/recipes/" class="btn btn-success allRecipes" target="_blank" data-wpel-link="internal">مشاهده دستورهای پخت</a>
+                    </div>
+                    @*<partial name="_LoginPartial" />*@
+                </div>
+            </div>
+        </nav>
+    </header>
+    @await RenderSectionAsync("PageHeader", required: true)
+    <div class="container font-weight-bolder">
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+        @Html.Partial("_WhatToCook")
+    </div>
+
+    <footer class="border-top footer text-muted ">
+        <div style="padding-top: 200px; padding-bottom: 80px; background-color: rgb(0, 0, 0); background-repeat: no-repeat; background-position: center top; background-image: url('/lib/pic/home_recipes2_sectionbg2.jpg');">
+
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-5" style="text-align:right;">
+                    <h6 class="text-success font-weight-bold">
+                        درباره کوک استپس
+                    </h6>
+                    <h2 class="font-weight-bold text-lg-right" style="text-align:right; padding-top:10px; font-size:40px; font-weight:bold">آشپزی ساده و لذت بخش است</h2>
+                    <br />
+                    <p style="color: #b3b3b3;">هدف ما این است که دستورات آشپزی ساده را با هم یاد بگیریم. و قدم به قدم جلو برویم. به نظر ما آشپزی یکی از بهترین سرگرمی هاست. با ما همراه باشید تا دستورات پخت هیجان انگیز را با هم امتحان کنیم.</p>
+                    <br />
+                    <br />
+                    <div class="col-12" style="padding-bottom:150px;">
+                        <a href="https://cooksteps.ir/recipes/" class="btn btn-success" target="_blank" data-wpel-link="internal"><i class="bi bi-chevron-right"></i>  انواع غذاها</a>
+                        <a href="https://cooksteps.ir/recipes/" class="btn btn-dark" target="_blank" data-wpel-link="internal"><i class="bi bi-chevron-right"></i>  تبلیغ در کوک استپس</a>
+                        <a href="https://cooksteps.ir/recipes/" class="btn btn-danger" target="_blank" data-wpel-link="internal"><i class="bi bi-chevron-right"></i>  فروشگاه</a>
+                    </div>
+
+                </div>
+                <br />
+                <br />
+                <hr />
+                <div class="col-12" style="padding:10px;">
+                    <div class="row">
+                        <div class="col-3" style="text-align:center">
+                            <img src="/lib/pic/3.png" alt="3" title="3" width="78" height="78" data-was-processed="true">
+                            <noscript><img src="/lib/pic/3.png" alt="3" title="3" width="78" height="78" /></noscript>
+                            <hr />
+                            <h4 style="color: #fff;">غذای ایرانی</h4>
+                            <p style="color: #b3b3b3;">انواع غذاهای لذیذ ایرانی از همه شهرها</p>
+                        </div>
+
+                        <div class="col-3" style="text-align:center">
+                            <img src="/lib/pic/home_recipes2_pic2.png" alt="3" title="3" width="78" height="78" data-was-processed="true">
+                            <noscript><img src="/lib/pic/home_recipes2_pic2.png" alt="3" title="3" width="78" height="78" /></noscript>
+                            <hr />
+                            <h4 style="color: #fff;">
+                                غذاهای بین المللی
+                            </h4>
+                            <p style="color: #b3b3b3;">
+                                لذت پختن یک غذای بین المللی.
+                            </p>
+                        </div>
+
+                        <div class="col-3" style="text-align:center">
+                            <img src="/lib/pic/home_recipes2_pic3.png" alt="3" title="3" width="78" height="78" data-was-processed="true">
+                            <noscript><img src="/lib/pic/home_recipes2_pic3.png" alt="3" title="3" width="78" height="78" /></noscript>
+                            <hr />
+                            <h4 style="color: #fff;">
+                                غذاهای گیاهی
+                            </h4>
+                            <p style="color: #b3b3b3;">
+                                غذاهای مناسب برای گیاهخواران
+                            </p>
+                        </div>
+
+                        <div class="col-3" style="text-align:center">
+                            <img src="/lib/pic/home_recipes2_pic4.png" alt="3" title="3" width="78" height="78" data-was-processed="true">
+                            <noscript><img src="/lib/pic/home_recipes2_pic4.png" alt="3" title="3" width="78" height="78" /></noscript>
+                            <hr />
+                            <h4 style="color: #fff;">
+                                غذاهای گوشتی و دریایی
+                            </h4>
+                            <p style="color: #b3b3b3;">دستور پخت انواع غذاهای گوشتی و دریایی</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <ul class="footerCategoryLinks">
+                        <li class="list-group text-dark" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/desserts" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>انواع دسر</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/پیتزا-ها" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>انواع پیتزا</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/international" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>غذا های بین المللی</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/پیش-غذا" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>انواع پیش غذا</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/ترشیجات" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>انواع ترشی</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-3">
+                    <ul class="footerCategoryLinks">
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/desserts" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>خورش ها</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/پیتزا-ها" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>غذاهای دریایی</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/international" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>غذای سنتی ایرانی</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/پیش-غذا" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>انواع فینگر فود</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/ترشیجات" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>میان وعده ها</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-3">
+                    <ul class="footerCategoryLinks">
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/desserts" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>انواع شیرینی و کیک</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/پیتزا-ها" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>نان</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/international" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>غذای اصلی</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/پیش-غذا" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span>غذاهای گیاهی</a></li>
+                        <li class="list-group" style="margin-bottom: 10px;"> <a href="https://cooksteps.ir/category/ترشیجات" data-wpel-link="internal"><span style="color: #20c05c; margin-right: 10px;">→</span> نکات مهم آشپزی</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-3 footerCategoryLinks">
+                    <h4>Cook Steps</h4>
+                    <p>با ما در تماس باشید</p>
+                    <p>
+                        <a href="#">CookSteps.ir@gmail.com</a>
+                        <br />
+
+                    </p>
+                    <p>ما را در شبکه های اجتماعی دنبال نمایید</p>
+                    <ul class="social" style="display: flex; text-align:right;padding-right: 0px;">
+                        <li class="list-group whatsapp"><a target="_blank" rel="nofollow noopener" href="+989395866362" title="WhatsApp" data-wpel-link="internal"><i class="bi bi-whatsapp"></i></a></li>
+                        <li class="list-group facebook"><a target="_blank" rel="nofollow noopener" href="https://www.facebook.com/cook.steps" title="Facebook" data-wpel-link="external"><i class="bi bi-facebook"></i></a></li>
+                        <li class="list-group twitter"><a target="_blank" rel="nofollow noopener" href="#" title="Twitter"><i class="bi bi-twitter"></i></a></li>
+                        <li class="list-group pinterest"><a target="_blank" rel="nofollow noopener" href="https://tr.pinterest.com/cooksteps/" title="Pinterest" data-wpel-link="external"><i class="bi bi-pin-angle"></i></a></li>
+                        <li class="list-group instagram"><a target="_blank" rel="nofollow noopener" href="http://instagram.com/cooksteps.ir" title="Instagram" data-wpel-link="external"><i class="bi-instagram bi"></i></a></li>
+                        <li class="list-group rss"><a target="_blank" rel="nofollow noopener" href="https://cooksteps.ir/feed/" title="RSS" data-wpel-link="internal"><i class="bi bi-rss"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr />
+            <div class="row footerCopyRight">
+                <div class="col-9" style="text-align:right">
+                    <p style="padding-top:10px;">&copy;  <a href="cooksteps.ir">2021 - Cooksteps.ir</a> - کوک استپس - آشپزی گام به گام. All Rights Reserved.</p>
+                </div>
+                <div class="col-3">
+                    <ul class="social" style="display: flex; text-align:right;padding: 0px;">
+                        <li class="list-group whatsapp"><a target="_blank" rel="nofollow noopener" href="+989395866362" title="WhatsApp" data-wpel-link="internal"><i class="bi bi-whatsapp"></i></a></li>
+                        <li class="list-group facebook"><a target="_blank" rel="nofollow noopener" href="https://www.facebook.com/cook.steps" title="Facebook" data-wpel-link="external"><i class="bi bi-facebook"></i></a></li>
+                        <li class="list-group twitter"><a target="_blank" rel="nofollow noopener" href="#" title="Twitter"><i class="bi bi-twitter"></i></a></li>
+                        <li class="list-group pinterest"><a target="_blank" rel="nofollow noopener" href="https://tr.pinterest.com/cooksteps/" title="Pinterest" data-wpel-link="external"><i class="bi bi-pin-angle"></i></a></li>
+                        <li class="list-group instagram"><a target="_blank" rel="nofollow noopener" href="http://instagram.com/cooksteps.ir" title="Instagram" data-wpel-link="external"><i class="bi-instagram bi"></i></a></li>
+                        <li class="list-group rss"><a target="_blank" rel="nofollow noopener" href="https://cooksteps.ir/feed/" title="RSS" data-wpel-link="internal"><i class="bi bi-rss"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
+    <script src="~/lib/vue/dist/vue.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Style", required: false)
+</body>
+</html>
